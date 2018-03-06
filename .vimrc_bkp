@@ -1,22 +1,5 @@
 " Global settings for all files (but may be overridden in ftplugin)
 
-"""Vim-plug
-call plug#begin('~/.vim/plugged')
-Plug 'sjl/gundo.vim'
-Plug 'rking/ag.vim'
-Plug 'wikitopian/hardmode'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
-Plug 'morhetz/gruvbox'
-"Plug 'Valloric/YouCompleteMe'
-Plug 'itchyny/lightline.vim'
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'mattn/emmet-vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'tpope/vim-surround'
-call plug#end()
-
 """Styling
 syntax enable " enable syntax processing
 " highlight ExtraWhitespace
@@ -46,7 +29,7 @@ set number " show line numbers
 set relativenumber " show relative line numbers
 set showcmd " show last command in bottom bar
 set cursorline " highlight current line
-filetype plugin indent on " load filetype specific indent files
+filetype indent on " load filetype specific indent files
 set wildmenu " visual autocomplete for command menu
 set lazyredraw " redraw only when we need to
 set showmatch " highlight matching [{()}]
@@ -78,8 +61,6 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 " highlight last inserted text
 nnoremap gV `[v`]
-" make backspace work like most programs "
-set backspace=indent,eol,start
 
 """Navigation
 
@@ -101,7 +82,7 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>ev :bo sp $MYVIMRC<CR>
 nnoremap <leader>ez :bo sp ~/.zshrc<CR>
 " source vimrc/zshrc 
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>sv :source ~/.vimrc<CR>
 nnoremap <leader>sz :source ~/.vimrc<CR>
 " use the silver searcher
 nnoremap <leader>ag :Ag
@@ -136,11 +117,6 @@ nnoremap <leader>d :b#\|bd #<CR>
 nnoremap <leader>ch :cd ~<CR>
 "cd to current's file folder
 nnoremap <leader>cc :cd %:h<CR>
-""
-" search for pattern globally and with confirmation
-nnoremap <leader>r :%s:::gc<left><left><left><left>
-" include grouping (i.e '\(\)') in search pattern"
-cmap ;\ \(\)<Left><Left>
 """Insert mode remaps
 inoremap " ""<left>
 inoremap ' ''<left>
@@ -151,21 +127,13 @@ inoremap { {}<left>
 inoremap [<CR> [<CR>]<ESC>O
 inoremap {<CR> {<CR>}<ESC>O
 inoremap ,. <right>
-inoremap ., <left>
-inoremap "" ""
-inoremap '' ''
-inoremap `` `` 
-inoremap () ()
-inoremap [] []
-inoremap {} {}
-
 "" resize split windows
 "width
-"map <C-<> <C-w><
-"map <C->> <C-w>>
+map <C-<> <C-w><
+map <C->> <C-w>>
 "height
-"map <C-+> <C-w>+
-"map <C--> <C-w>-
+map <C-+> <C-w>+
+map <C--> <C-w>-
 
 """YCM Config
 let g:ycm_server_python_interpreter = '/usr/bin/python2'
@@ -203,3 +171,19 @@ endfunction
 """ emmet config
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+
+"""Vim-plug
+call plug#begin('~/.vim/plugged')
+Plug 'sjl/gundo.vim'
+Plug 'rking/ag.vim'
+Plug 'wikitopian/hardmode'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'morhetz/gruvbox'
+Plug 'Valloric/YouCompleteMe'
+Plug 'itchyny/lightline.vim'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'mattn/emmet-vim'
+Plug 'hail2u/vim-css3-syntax'
+call plug#end()
