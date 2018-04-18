@@ -15,8 +15,6 @@ Plug 'KabbAmine/vCoolor.vim'
 Plug 'mattn/emmet-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tpope/vim-surround'
-Plug 'pangloss/vim-javascript'
-Plug 'sbdchd/neoformat'
 call plug#end()
 
 """Styling
@@ -24,14 +22,11 @@ syntax enable " enable syntax processing
 " highlight ExtraWhitespace
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 colorscheme gruvbox
-set termguicolors
-set background=dark
-let g:gruvbox_contrast_light='medium'
-let g:gruvbox_invert_selection=0
 if $TERM == "xterm-termite"
   set termguicolors
   set background=light
   let g:gruvbox_contrast_light='medium'
+  let g:gruvbox_invert_selection=0
 endif
 set listchars=trail:~,space:·
 "highlight Cursor guifg=white guibg=black
@@ -104,11 +99,10 @@ let mapleader="," " leader is comma
 nnoremap <leader>u :GundoToggle<CR>
 " edit vimrc/zshrc
 nnoremap <leader>ev :bo sp $MYVIMRC<CR>
-nnoremap <leader>etv :bo sp ~/.vimrc<CR>
 nnoremap <leader>ez :bo sp ~/.zshrc<CR>
 " source vimrc/zshrc 
 nnoremap <leader>sv :source $MYVIMRC<CR>
-nnoremap <leader>stv :source ~/.vimrc<CR>
+nnoremap <leader>sz :source ~/.vimrc<CR>
 " use the silver searcher
 nnoremap <leader>ag :Ag
 " clear last used search pattern
@@ -154,19 +148,16 @@ inoremap ` ``<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
-inoremap (<CR> (<CR>)<ESC>O
 inoremap [<CR> [<CR>]<ESC>O
 inoremap {<CR> {<CR>}<ESC>O
 inoremap ,. <right>
 inoremap ., <left>
 inoremap "" ""
 inoremap '' ''
-inoremap `` ``
+inoremap `` `` 
 inoremap () ()
 inoremap [] []
 inoremap {} {}
-inoremap <C-e> <Esc>A
-inoremap <C-a> <Esc>I
 
 "" resize split windows
 "width
@@ -175,40 +166,6 @@ inoremap <C-a> <Esc>I
 "height
 "map <C-+> <C-w>+
 "map <C--> <C-w>-
-
-""Functions
-" follow symlinked file
-function! FollowSymlink()
-  let current_file = expand('%:p')
-  " check if file type is a symlink
-  if getftype(current_file) == 'link'
-    " if it is a symlink resolve to the actual file path
-    "   and open the actual file
-    let actual_file = resolve(current_file)
-    silent! execute 'file ' . actual_file
-  end
-endfunction
-
-" set working directory to git project root
-" or directory of current file if not git project
-function! SetProjectRoot()
-  " default to the current file's directory
-  lcd %:p:h
-  let git_dir = system("git rev-parse --show-toplevel")
-  " See if the command output starts with 'fatal' (if it does, not in a git repo)
-  let is_not_git_dir = matchstr(git_dir, '^fatal:.*')
-  " if git project, change local directory to git project root
-  if empty(is_not_git_dir)
-    lcd `=git_dir`
-  endif
-endfunction
-
-" follow symlink and set working directory
-autocmd BufRead *
-  \ call FollowSymlink() |
-  \ call SetProjectRoot()
-
-nnoremap <leader>cp :call SetProjectRoot()<CR>
 
 """YCM Config
 let g:ycm_server_python_interpreter = '/usr/bin/python2'
@@ -246,16 +203,3 @@ endfunction
 """ emmet config
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
-
-""" Neoformat config
-
-let g:neoformat_only_msg_on_error = 1
-let g:neoformat_javascript_prettier = {
-      \ 'exe': './node_modules/.bin/prettier',
-      \ 'args': ['--single-quote', '--write'],
-      \ 'replace': 1
-      \ }
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
