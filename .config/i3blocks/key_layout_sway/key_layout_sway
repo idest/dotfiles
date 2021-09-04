@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+INPUT=$(grep ^input ~/.config/sway/config | awk '{print $2}')
+LAYOUT=$(swaymsg -t get_inputs|\
+  jq --arg v "$INPUT" \
+  'map(select(.identifier==$v))|.[].xkb_active_layout_name'|\
+  tr -d \")
+if [ "$LAYOUT" = "English (US)" ]
+then
+  code="us"
+elif [ "$LAYOUT" = "Spanish" ]
+then
+  code="es"
+else
+  code="?"
+fi
+echo $code

@@ -1,0 +1,341 @@
+* {
+  border: 0;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+window#waybar {
+  background: none;
+  color: #ebdbb2;
+}
+
+.modules-left button, .modules-left widget > label, .modules-center label, .modules-right label {
+  border-top: 5px solid #1d2021;
+  border-bottom: 5px solid #1d2021;
+}
+
+.modules-left widget:nth-last-child(2) label,
+.modules-center widget:nth-last-child(2) label {
+  border-radius: 0px 50px 50px 0px;
+}
+
+.modules-center widget:nth-child(2) label,
+.modules-right widget:nth-child(2) label {
+  border-radius: 50px 0px 0px 50px;
+}
+
+.modules-center widget:nth-child(3) label,
+.modules-center widget:nth-child(6) label,
+.modules-right widget:nth-child(3n) label {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  box-shadow: 0px -15px 0px 0px #1d2021, 0px 15px 0px 0px #1d2021;
+}
+
+.modules-center widget:nth-last-child(3) label,
+.modules-center widget:nth-last-child(6) label {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  box-shadow: 0px -15px 0px 0px #1d2021, 0px 15px 0px 0px #1d2021;
+}
+
+#custom-right-arrow-final,
+#custom-left-arrow-final {
+  color: #1d2021;
+  font-size: 15px;
+  border: 0;
+}
+
+#custom-right-arrow-fg-workspaces,
+#custom-right-arrow-fg-playerctl,
+#custom-right-arrow-fg-spotifyd,
+#custom-right-arrow-fg-clock-right,
+#custom-left-arrow-fg-clock-center,
+#custom-right-arrow-fg-clock-center,
+#custom-left-arrow-fg-clock-left,
+#custom-left-arrow-fg-pacman,
+#custom-left-arrow-fg-colorpicker,
+#custom-left-arrow-fg-gpu,
+#custom-left-arrow-fg-pulseaudio,
+#custom-left-arrow-fg-network,
+#custom-left-arrow-fg-memory,
+#custom-left-arrow-fg-cpu,
+#custom-left-arrow-fg-temperature,
+#custom-left-arrow-fg-disk,
+#custom-left-arrow-fg-language {
+  font-size: 15px;
+  background: #1d2021;
+}
+
+#custom-right-arrow-bg-playerctl,
+#custom-right-arrow-bg-spotifyd,
+#custom-left-arrow-bg-clock-left,
+#custom-right-arrow-bg-clock-right,
+#custom-left-arrow-bg-pacman,
+#custom-left-arrow-bg-colorpicker,
+#custom-left-arrow-bg-gpu,
+#custom-left-arrow-bg-pulseaudio,
+#custom-left-arrow-bg-network,
+#custom-left-arrow-bg-memory,
+#custom-left-arrow-bg-cpu,
+#custom-left-arrow-bg-temperature,
+#custom-left-arrow-bg-disk {
+  font-size: 15px;
+  color: #1d2021;
+}
+
+#workspaces {
+  background: #32302f;
+}
+
+#custom-right-arrow-fg-workspaces {
+  color: #32302f;
+}
+
+#workspaces button {
+  padding: 0 2px;
+  color: #d5c4a1;
+}
+
+#workspaces button.focused {
+  color: #fbf1c7;
+  background: #32302f;
+  padding-bottom: 2px;
+  border-bottom: 2px solid #fbf1c7;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+}
+
+#workspaces button:hover {
+  background: #32302f;
+}
+
+#mode {
+  color: #fb4934;
+  background: #32302f;
+}
+
+#custom-playerctl {
+  color: #d5c4a1;
+  background: #32302f;
+}
+
+#custom-right-arrow-bg-playerctl {
+  background: #32302f;
+}
+
+#custom-right-arrow-fg-playerctl {
+  color: #32302f;
+}
+
+#custom-spotifyd {
+  color: #d5c4a1;
+  background: #32302f;
+}
+
+#custom-right-arrow-bg-spotifyd {
+  background: #32302f;
+}
+
+#custom-right-arrow-fg-spotifyd {
+  color: #32302f;
+}
+
+#clock.left {
+  color: #ebdbb2;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-clock-left {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-clock-left {
+  background: #32302f;
+}
+
+#clock.center {
+  color: #ebdbb2;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-clock-center {
+  color: #32302f;
+}
+
+#custom-right-arrow-fg-clock-center {
+  color: #32302f;
+}
+
+#clock.right {
+  color: #ebdbb2;
+  background: #32302f;
+}
+
+#custom-right-arrow-fg-clock-right {
+  color: #32302f;
+}
+
+#custom-right-arrow-bg-clock-right {
+  background: #32302f;
+}
+
+#custom-pacman {
+  color: #9296d3;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-pacman {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-pacman {
+  background: #32302f;
+}
+
+#custom-colorpicker {
+  color: #8ec07c;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-colorpicker {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-colorpicker {
+  background: #32302f;
+}
+
+#custom-gpu {
+  color: #83a598;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-gpu {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-gpu {
+  background: #32302f;
+}
+
+#pulseaudio {
+  color: #ebdbb2;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-pulseaudio {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-pulseaudio {
+  background: #32302f;
+}
+
+#network {
+  color: #9296d3;
+  background: #32302f;
+  padding: 0 5px 0 10px;
+}
+
+#custom-left-arrow-fg-network {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-network {
+  background: #32302f;
+}
+
+#memory {
+  color: #83a598;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-memory {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-memory {
+  background: #32302f;
+}
+
+#cpu {
+  color: #83a598;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-cpu {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-cpu {
+  background: #32302f;
+}
+
+#temperature {
+  color: #83a598;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-temperature {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-temperature {
+  background: #32302f;
+}
+
+#temperature.critical {
+  color: #fb4934;
+}
+
+#disk {
+  color: #8ec07c;
+  background: #32302f;
+}
+
+#custom-left-arrow-fg-disk {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-disk {
+  background: #32302f;
+}
+
+#language {
+  /*background: #a89984;*/
+  color: #ebdbb2;
+  background: #32302f;
+  min-width: 16px;
+}
+
+#custom-left-arrow-fg-language {
+  color: #32302f;
+}
+
+#custom-left-arrow-bg-language {
+  background: #32302f;
+}
+
+#mode,
+#custom-playerctl,
+#custom-spotifyd,
+#clock,
+#custom-pacman,
+#custom-colorpicker,
+#custom-gpu,
+#pulseaudio,
+#memory,
+#cpu,
+#temperature,
+#disk,
+#language {
+  padding: 0 10px;
+}
+
+/*# sourceMappingURL=style.css.map */

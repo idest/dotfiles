@@ -1,0 +1,5 @@
+set default-bg \#bebebe
+set selection-clipboard clipboard
+set show-scrollbars true
+set smooth-scroll true
+set smooth-zoom true

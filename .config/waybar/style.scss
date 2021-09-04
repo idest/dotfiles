@@ -1,0 +1,428 @@
+@import 'gruvbox';
+
+//Gruvbox Theme
+$bg0: $gb-dm-bg0; //darker
+$bg0-hard: $gb-dm-bg0-hard;
+$bg0-soft: $gb-dm-bg0-soft;
+$bg1: $gb-dm-bg1;
+$bg2: $gb-dm-bg2;
+$bg3: $gb-dm-bg3;
+$bg4: $gb-dm-bg4; //lighter
+
+$fg0: $gb-dm-fg0; //lighter
+$fg1: $gb-dm-fg1;
+$fg2: $gb-dm-fg2;
+$fg3: $gb-dm-fg3;
+$fg4: $gb-dm-fg4; //darker
+
+$dark-blue: $gb-dm-dark-blue;
+$dark-green: $gb-dm-dark-green;
+$dark-aqua: $gb-dm-dark-aqua;
+$dark-orange: $gb-dm-dark-orange;
+$dark-purple: $gb-dm-dark-purple;
+$dark-red: $gb-dm-dark-red;
+$dark-yellow: $gb-dm-dark-yellow;
+$dark-gray: $gb-dm-dark-gray;
+
+$light-blue: $gb-dm-light-blue;
+$light-green: $gb-dm-light-green;
+$light-aqua: $gb-dm-light-aqua;
+$light-orange: $gb-dm-light-orange;
+$light-purple: $gb-dm-light-purple;
+$light-red: $gb-dm-light-red;
+$light-yellow: $gb-dm-light-yellow;
+$light-gray: $gb-dm-light-gray;
+
+//$black: #292b2e;
+//$white: #fdf6e3;
+//$gray: #928374;
+//$blue: #268bd2;
+//$green: #859900;
+//$aqua: #2aa198;
+//$soft-purple: #6c71c4;
+//$purple: #b16286;
+//$red: #fb4934;
+//$yellow: #b58900;
+
+// Background
+$background: $bg0-hard;
+$background-dark: $bg0-hard;
+$background-light: $bg0-soft;//-soft;//$bg0-soft;
+// Foreground
+$foreground: $fg1;
+$foreground-dark: $fg2;
+$foreground-light: $fg0;
+// Default
+$default: $background-light;
+// Workspaces
+$workspaces: $default;
+$workspaces-fg: $foreground-dark;
+$workspaces-focused: $default;
+$workspaces-focused-fg: $foreground-light; //#268bd2;
+$mode: $default;
+$mode-fg: $light-red;
+// Playerctl
+$playerctl: $default;
+$playerctl-fg: $foreground-dark;
+// Spotifyd
+$spotifyd: $default;
+$spotifyd-fg: $foreground-dark;
+// Center
+$clock-fg: $foreground;
+$clock: $default;
+// Network and updates
+$pacman-fg: #9296d3;//$light-purple;
+$pacman: $default;
+$network-fg: #9296d3;//$light-purple;
+$network: $default;
+// Filesystem and utilities
+$colorpicker-fg: $light-aqua;
+$colorpicker: $default;
+$disk-fg: $light-aqua;
+$disk: $default;
+// Hardware stats
+$gpu-fg: $light-blue;
+$gpu: $default;
+$memory-fg: $light-blue;
+$memory: $default;
+$cpu-fg: $light-blue;
+$cpu: $default;
+$temperature-fg: $light-blue;
+$temperature: $default;
+$temperature-critical: $light-red;
+//Knobs and settings
+$pulseaudio-fg: $foreground;
+$pulseaudio: $default;
+$language-fg: $foreground;
+$language: $default;
+
+$arrow-size: 15px;
+$margin-top: 5px;
+$border-top: 5px;
+$border-bottom: 5px;
+
+$center-index: 6;
+
+* {
+  border: 0;
+  border-radius: 0;
+	font-size: 13px;
+  font-weight: bold;
+	font-family: monospace;
+}
+
+window#waybar {
+  background: none;
+	color: $foreground;
+  //min-height: 25px;
+}
+
+.modules-left button, .modules-left widget > label, .modules-center label, .modules-right label {
+  border-top: $border-top solid $background;
+  border-bottom: $border-bottom solid $background;
+}
+
+//.modules-left widget:nth-child(2) button {
+//  border-radius: 0px 50px 50px 0px;
+//}
+
+// arrows just to the left of a right-arrow-final
+.modules-left widget:nth-last-child(2) label,
+.modules-center widget:nth-last-child(2) label {
+  border-radius: 0px 50px 50px 0px;
+}
+
+// arrows just to the right of a left-arrow-final
+.modules-center widget:nth-child(2) label,
+.modules-right widget:nth-child(2) label {
+  border-radius: 50px 0px 0px 50px;
+}
+
+// modules boxes "pointing" left
+.modules-center widget:nth-child(3) label,
+.modules-center widget:nth-child(6) label,
+.modules-right widget:nth-child(3n) label {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  box-shadow: 0px (-$arrow-size) 0px 0px $background, 0px $arrow-size 0px 0px $background;
+}
+
+// modules boxes "pointing" right
+.modules-center widget:nth-last-child(3) label,
+.modules-center widget:nth-last-child(6) label {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  box-shadow: 0px (-$arrow-size) 0px 0px $background, 0px $arrow-size 0px 0px $background;
+}
+
+// arrows at the final of each modules section
+#custom-right-arrow-final,
+#custom-left-arrow-final {
+	color: $background;
+  font-size: $arrow-size;
+  border: 0;
+  //background: none;
+}
+
+// arrows colored as the modules
+#custom-right-arrow-fg-workspaces,
+#custom-right-arrow-fg-playerctl,
+#custom-right-arrow-fg-spotifyd,
+#custom-right-arrow-fg-clock-right,
+#custom-left-arrow-fg-clock-center,
+#custom-right-arrow-fg-clock-center,
+#custom-left-arrow-fg-clock-left,
+#custom-left-arrow-fg-pacman,
+#custom-left-arrow-fg-colorpicker,
+#custom-left-arrow-fg-gpu,
+#custom-left-arrow-fg-pulseaudio,
+#custom-left-arrow-fg-network,
+#custom-left-arrow-fg-memory,
+#custom-left-arrow-fg-cpu,
+#custom-left-arrow-fg-temperature,
+#custom-left-arrow-fg-disk,
+#custom-left-arrow-fg-language {
+  font-size: $arrow-size;
+	background: $background;
+}
+
+// arrows colored as the background
+#custom-right-arrow-bg-playerctl,
+#custom-right-arrow-bg-spotifyd,
+#custom-left-arrow-bg-clock-left,
+#custom-right-arrow-bg-clock-right,
+#custom-left-arrow-bg-pacman,
+#custom-left-arrow-bg-colorpicker,
+#custom-left-arrow-bg-gpu,
+#custom-left-arrow-bg-pulseaudio,
+#custom-left-arrow-bg-network,
+#custom-left-arrow-bg-memory,
+#custom-left-arrow-bg-cpu,
+#custom-left-arrow-bg-temperature,
+#custom-left-arrow-bg-disk {
+  font-size: $arrow-size;
+	color: $background;
+}
+
+#workspaces {
+  background: $workspaces;
+}
+#custom-right-arrow-fg-workspaces {
+  color: $workspaces;
+}
+#workspaces button {
+	padding: 0 2px;
+	color: $workspaces-fg;
+}
+#workspaces button.focused {
+	color: $workspaces-focused-fg;
+  background: $workspaces-focused;
+  padding-bottom: $border-bottom - 3px;
+  border-bottom: 2px solid $workspaces-focused-fg;
+}
+#workspaces button:hover {
+	box-shadow: inherit;
+	text-shadow: inherit;
+}
+#workspaces button:hover {
+  background: $workspaces-focused;
+	//padding: 0 3px;
+}
+
+#mode {
+  color: $mode-fg;
+  background: $mode;
+}
+
+#custom-playerctl {
+  color: $playerctl-fg;
+  background: $playerctl;
+}
+#custom-right-arrow-bg-playerctl {
+  background: $playerctl;
+}
+#custom-right-arrow-fg-playerctl {
+  color: $playerctl;
+}
+
+#custom-spotifyd {
+  color: $spotifyd-fg;
+  background: $spotifyd;
+}
+#custom-right-arrow-bg-spotifyd {
+  background: $spotifyd;
+}
+#custom-right-arrow-fg-spotifyd {
+  color: $spotifyd;
+}
+
+#clock.left {
+  color: $clock-fg;
+  background: $clock;
+}
+#custom-left-arrow-fg-clock-left {
+  color: $clock;
+}
+#custom-left-arrow-bg-clock-left {
+  background: $clock;
+}
+
+#clock.center {
+  color: $clock-fg;
+  background: $clock;
+}
+#custom-left-arrow-fg-clock-center {
+  color: $clock;
+}
+#custom-right-arrow-fg-clock-center {
+  color: $clock;
+}
+
+#clock.right {
+  color: $clock-fg;
+  background: $clock;
+}
+#custom-right-arrow-fg-clock-right {
+  color: $clock;
+}
+#custom-right-arrow-bg-clock-right {
+  background: $clock;
+}
+
+#custom-pacman {
+	color: $pacman-fg;
+	background: $pacman;
+}
+#custom-left-arrow-fg-pacman {
+	color: $pacman;
+}
+#custom-left-arrow-bg-pacman {
+	background: $pacman;
+}
+
+#custom-colorpicker {
+	color: $colorpicker-fg;
+	background: $colorpicker;
+}
+#custom-left-arrow-fg-colorpicker {
+	color: $colorpicker;
+}
+#custom-left-arrow-bg-colorpicker {
+	background: $colorpicker;
+}
+
+#custom-gpu {
+	color: $gpu-fg;
+	background: $gpu;
+}
+#custom-left-arrow-fg-gpu {
+	color: $gpu;
+}
+#custom-left-arrow-bg-gpu {
+	background: $gpu;
+}
+
+#pulseaudio {
+	color: $pulseaudio-fg;
+	background: $pulseaudio;
+}
+#custom-left-arrow-fg-pulseaudio {
+	color: $pulseaudio;
+}
+#custom-left-arrow-bg-pulseaudio {
+	background: $pulseaudio;
+}
+
+#network {
+	color: $network-fg;
+	background: $network;
+	padding: 0 5px 0 10px;
+}
+#custom-left-arrow-fg-network {
+	color: $network;
+}
+#custom-left-arrow-bg-network {
+	background: $network;
+}
+
+#memory {
+	color: $memory-fg;
+	background: $memory;
+}
+#custom-left-arrow-fg-memory {
+	color: $memory;
+}
+#custom-left-arrow-bg-memory {
+	background: $memory;
+}
+
+#cpu {
+	color: $cpu-fg;
+	background: $cpu;
+}
+#custom-left-arrow-fg-cpu {
+	color: $cpu;
+}
+#custom-left-arrow-bg-cpu {
+	background: $cpu;
+}
+
+#temperature {
+	color: $temperature-fg;
+  background: $temperature;
+}
+#custom-left-arrow-fg-temperature {
+  color: $temperature;
+}
+#custom-left-arrow-bg-temperature {
+  background: $temperature;
+}
+#temperature.critical {
+  color: $temperature-critical;
+}
+
+#disk {
+	color: $disk-fg;
+	background: $disk;
+}
+#custom-left-arrow-fg-disk {
+	color: $disk;
+}
+#custom-left-arrow-bg-disk {
+	background: $disk;
+}
+
+#language {
+	/*background: #a89984;*/
+	color: $language-fg;
+  background: $language;
+  min-width: 16px;
+}
+#custom-left-arrow-fg-language {
+  color: $language;
+}
+#custom-left-arrow-bg-language {
+  background: $language;
+}
+
+#mode,
+#custom-playerctl,
+#custom-spotifyd,
+#clock,
+#custom-pacman,
+#custom-colorpicker,
+#custom-gpu,
+#pulseaudio,
+#memory,
+#cpu,
+#temperature,
+#disk,
+#language {
+	padding: 0 10px;
+}
+
+//.modules-right widget:nth-child(3n):not(:last-child) label{
+//  border: 5px solid $red;
+//}
+
+

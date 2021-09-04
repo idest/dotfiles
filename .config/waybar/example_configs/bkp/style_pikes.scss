@@ -1,0 +1,300 @@
+@import 'gruvbox';
+
+$bg-dark: $gb-dm-bg0;
+$bg: $gb-dm-bg1;
+$fg-light: $gb-dm-fg0;
+$fg-dark: $gb-lm-fg0;
+$fg: $gb-dm-fg1;
+$gray: $gb-dm-dark-gray;
+$blue: $gb-dm-dark-blue;
+$green: $gb-dm-dark-green;
+$aqua: $gb-dm-dark-aqua;
+$soft-purple: #6c71c4;
+$purple: $gb-dm-dark-purple;
+$red: $gb-dm-dark-red;
+$yellow: $gb-dm-dark-yellow;
+
+//$bg: #292b2e;
+//$fg: #fdf6e3;
+//$gray: #928374;
+//$blue: #268bd2;
+//$green: #859900;
+//$aqua: #2aa198;
+//$soft-purple: #6c71c4;
+//$purple: #b16286;
+//$red: #fb4934;
+//$yellow: #b58900;
+
+$default: $bg-dark;
+
+$background: $bg;
+$foreground: $fg;
+$foreground-colors: $fg-light;
+$workspaces: $bg;
+$workspaces-focused: $bg-dark;
+$clock: $default;
+$pulseaudio: $blue;
+$network: $green;
+$memory: $aqua;
+$cpu: $soft-purple;
+$temperature: $purple;
+$temperature-critical: $red;
+$disk: $yellow;
+$language: $default;
+
+$arrow-size: 15px;
+$margin-top: 5px;
+$border-top: 5px;
+$border-bottom: 5px;
+
+* {
+  border: 0;
+  border-radius: 0;
+	font-size: 13px;
+  font-weight: bold;
+	font-family: monospace;
+}
+
+window#waybar {
+  background: none;
+	color: $foreground;
+  //min-height: 25px;
+}
+
+
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+  //margin-top: $margin-top;
+	color: $background;
+  font-size: $arrow-size;
+  background: none;
+  //border-top: $border-top solid transparent;
+  //border-bottom: $border-bottom solid transparent;
+}
+
+
+#custom-right-arrow-dark-workspaces,
+#custom-right-arrow-dark-clock-center,
+#custom-right-arrow-dark-clock-right {
+  font-size: $arrow-size;
+	background: $background;
+  //border-top: $border-top solid $background;
+  //border-bottom: $border-bottom solid $background;
+  border-radius: 0px 50px 50px 0px;
+}
+#custom-right-arrow-dark-clock-center {
+  box-shadow: 0px (-$arrow-size) 0px 0px $background, 0px $arrow-size 0px 0px $background;
+}
+
+#custom-left-arrow-dark-clock-left,
+#custom-left-arrow-dark-clock-center,
+#custom-left-arrow-dark-pulseaudio,
+#custom-left-arrow-dark-network,
+#custom-left-arrow-dark-memory,
+#custom-left-arrow-dark-cpu,
+#custom-left-arrow-dark-temperature,
+#custom-left-arrow-dark-disk,
+#custom-left-arrow-dark-language {
+  font-size: $arrow-size;
+	background: $background;
+  //border-top: $border-top solid $background;
+  //border-bottom: $border-bottom solid $background;
+  border-radius: 50px 0 0 50px;
+}
+#custom-left-arrow-dark-clock-center,
+#custom-left-arrow-dark-network,
+#custom-left-arrow-dark-memory,
+#custom-left-arrow-dark-cpu,
+#custom-left-arrow-dark-temperature,
+#custom-left-arrow-dark-disk,
+#custom-left-arrow-dark-language {
+  box-shadow: 0px (-$arrow-size) 0px 0px $background, 0px $arrow-size 0px 0px $background;
+}
+
+#custom-left-arrow-light-clock-left,
+#custom-right-arrow-light-clock-right,
+#custom-left-arrow-light-pulseaudio,
+#custom-left-arrow-light-network,
+#custom-left-arrow-light-memory,
+#custom-left-arrow-light-cpu,
+#custom-left-arrow-light-temperature,
+#custom-left-arrow-light-disk {
+  font-size: $arrow-size;
+	color: $background;
+  //border-top: $border-top solid $background;
+  //border-bottom: $border-bottom solid $background;
+}
+
+
+#workspaces,
+#clock.center,
+#clock.right {
+	color: $foreground;
+  //border-top: $border-bottom solid $background;
+  //border-bottom: $border-bottom solid $background;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+
+#clock.left,
+#clock.center,
+#pulseaudio,
+#network,
+#memory,
+#cpu,
+#temperature,
+#disk,
+#language,
+#tray {
+	color: $foreground-colors;
+  //border-top: $border-top solid $background;
+  //border-bottom: $border-bottom solid $background;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  box-shadow: 0px (-$arrow-size) 0px 0px $background, 0px $arrow-size 0px 0px $background;
+}
+
+#workspaces {
+  background: $workspaces;
+}
+#custom-right-arrow-dark-workspaces {
+  color: $workspaces;
+}
+
+#workspaces button {
+	padding: 0 2px;
+	color: $foreground;
+}
+
+#workspaces button.focused {
+	color: #ffffff;//#268bd2;
+	//background: #1a1a1a;
+  background: $workspaces-focused;
+}
+#workspaces button:hover {
+	box-shadow: inherit;
+	text-shadow: inherit;
+}
+#workspaces button:hover {
+	//background: #1a1a1a;
+  background: $workspaces-focused;
+	border: #1a1a1a;
+	//padding: 0 3px;
+}
+
+#clock.left {
+  background: $clock;
+}
+#custom-left-arrow-dark-clock-left {
+  color: $clock;
+}
+#custom-left-arrow-light-clock-left {
+  background: $clock;
+}
+
+#clock.center {
+  background: $clock;
+}
+#custom-left-arrow-dark-clock-center {
+  color: $clock;
+}
+#custom-right-arrow-dark-clock-center {
+  color: $clock;
+}
+
+#clock.right {
+  background: $clock;
+}
+#custom-right-arrow-dark-clock-right {
+  color: $clock;
+}
+#custom-right-arrow-light-clock-right {
+  background: $clock;
+}
+
+#pulseaudio {
+	background: $pulseaudio;
+}
+#custom-left-arrow-dark-pulseaudio {
+	color: $pulseaudio;
+}
+#custom-left-arrow-light-pulseaudio {
+	background: $pulseaudio;
+}
+
+#network {
+	background: $network;
+	padding: 0 5px 0 10px;
+}
+#custom-left-arrow-dark-network {
+	color: $network;
+}
+#custom-left-arrow-light-network {
+	background: $network;
+}
+
+#memory {
+	background: $memory;
+}
+#custom-left-arrow-dark-memory {
+	color: $memory;
+}
+#custom-left-arrow-light-memory {
+	background: $memory;
+}
+
+#cpu {
+	background: $cpu;
+}
+#custom-left-arrow-dark-cpu {
+	color: $cpu;
+}
+#custom-left-arrow-light-cpu {
+	background: $cpu;
+}
+
+#temperature {
+  background: $temperature;
+}
+#custom-left-arrow-dark-temperature {
+  color: $temperature;
+}
+#custom-left-arrow-light-temperature {
+  background: $temperature;
+}
+#temperature.critical {
+  background: $temperature-critical;
+}
+
+#disk {
+	background: $disk;
+}
+#custom-left-arrow-dark-disk {
+	color: $disk;
+}
+#custom-left-arrow-light-disk {
+	background: $disk;
+}
+
+#language {
+	/*background: #a89984;*/
+  background: $language;
+  min-width: 16px;
+}
+#custom-left-arrow-dark-language {
+  color: $language;
+}
+#custom-left-arrow-light-language {
+  background: $language;
+}
+
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#temperature,
+#disk,
+#language {
+	padding: 0 10px;
+}

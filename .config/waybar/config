@@ -1,0 +1,346 @@
+// -*- mode: json -*-
+
+{
+	"layer": "bottom",
+	"position": "top",
+  "margin-top": 10,
+
+	"modules-left": [
+		"sway/workspaces",
+    "sway/mode",
+		"custom/right-arrow-fg-workspaces",
+    //"custom/right-arrow-bg-playerctl",
+    //"custom/playerctl",
+    //"custom/right-arrow-fg-playerctl",
+    "custom/right-arrow-bg-spotifyd",
+    "custom/spotifyd",
+    "custom/right-arrow-fg-spotifyd",
+		"custom/right-arrow-final",
+		"custom/right-arrow-dark#example"
+	],
+	"modules-center": [
+		"custom/left-arrow-final",
+		"custom/left-arrow-fg-clock-left",
+		"clock#left",
+		"custom/left-arrow-bg-clock-left",
+		"custom/left-arrow-fg-clock-center",
+		"clock#center",
+		"custom/right-arrow-fg-clock-center",
+		"custom/right-arrow-bg-clock-right",
+		"clock#right",
+		"custom/right-arrow-fg-clock-right",
+		"custom/right-arrow-final"
+	],
+	"modules-right": [
+    //"custom/test",
+		"custom/left-arrow-final",
+		"custom/left-arrow-fg-pacman",
+		"custom/pacman",
+		"custom/left-arrow-bg-pacman",
+		"custom/left-arrow-fg-network",
+    "network",
+		"custom/left-arrow-bg-network",
+		"custom/left-arrow-fg-colorpicker",
+		"custom/colorpicker",
+		"custom/left-arrow-bg-colorpicker",
+		"custom/left-arrow-fg-disk",
+		"disk",
+		"custom/left-arrow-bg-disk",
+		"custom/left-arrow-fg-gpu",
+		"custom/gpu",
+		"custom/left-arrow-bg-gpu",
+		"custom/left-arrow-fg-memory",
+		"memory",
+		"custom/left-arrow-bg-memory",
+		"custom/left-arrow-fg-cpu",
+		"cpu",
+		"custom/left-arrow-bg-cpu",
+		"custom/left-arrow-fg-temperature",
+		"temperature",
+		"custom/left-arrow-bg-temperature",
+		"custom/left-arrow-fg-pulseaudio",
+		"pulseaudio",
+		"custom/left-arrow-bg-pulseaudio",
+		"custom/left-arrow-fg-language",
+    "sway/language"
+	],
+
+	"sway/workspaces": {
+		"disable-scroll": false,
+		"format": "{icon}", //"{name}: {icon}",
+    "format-icons": {
+      "home": "~",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10"
+    },
+    "persistent_workspaces": {
+      "home": []
+    }
+	},
+
+  "custom/playerctl": {
+    "format": "{}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 40,
+    "exec": "~/dotfiles/.config/waybar/modules/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+    "signal": 8
+  },
+
+  "custom/spotifyd": {
+    "format": " {}",
+    "interval": "once",
+    "max-length": 80,
+    "exec": "echo $(playerctl metadata --format '{{ title }} - {{ artist }}')",
+    "exec-if": "pgrep spotifyd",
+    "on-click-right": "kitty sh -c '~/bin/launchspt'",
+    "on-click-middle": "killall spt; killall spotifyd",
+    "signal": 8
+  },
+
+	"clock#left": {
+		"format": "{:%a}",
+    //"timezone": "America/Asuncion",
+    //"locale": "es_ES.UTF-8",
+		"tooltip": false
+	},
+	"clock#center": {
+		"format": "{:%H:%M}",
+		"tooltip": false
+	},
+	"clock#right": {
+		"format": "{:%d/%m}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+	},
+
+  "custom/pacman": {
+    "format": " {}",
+    "interval": 86400,
+    "exec": "checkupdates | wc -l",
+    "exec if": "exit 0",
+    "on-click-right": "kitty --hold sh -c 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar"
+  },
+  "custom/colorpicker": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "~/bin/colorpicker -f rgb -c",
+    "on-click-right": "~/bin/colorpicker -f hex -c"
+  },
+  "custom/gpu": {
+    "restart-interval": 2,
+    "format": "",
+    "format-alt": " {}",
+    "tooltip": false,
+    "exec": "~/bin/waybar-gpustats",
+    //"on-click-right": "killall htop & alacritty -t htop -e htop"
+  },
+  "custom/test": {
+    "exec": "~/bin/waybar-test",
+    //"restart-interval": 2,
+    //"format-alt": "test {}",
+    "format": "test {}",
+    "format-alt": "test2 {}",
+    "on-click": "if [ pgrep spotify ]killall waybar-test",
+    //"exec-on-event": true
+    //"exec-if": "pgrep waybar-test",
+    //"interval": 1
+    //"restart-interval": 2,
+  },
+	"pulseaudio": {
+		"format": "{icon} {volume:2}%",
+		"format-alt": "{icon}",
+		"format-bluetooth": "{icon}  {volume}%",
+		"format-muted": "MUTE",
+		"format-icons": {
+			"headphones": "",
+			"default": [
+				"",
+				""
+			]
+		},
+		"scroll-step": 5,
+		//"on-click": "pamixer -t",
+		"on-click-right": "pavucontrol"
+	},
+  "network": {
+      "tooltip": false,
+      // "interface": "wlp2*", // (Optional) To force the use of this interface
+      "format-wifi": " {essid} ({signalStrength}%)",
+      //"format-ethernet": " {ifname}: {ipaddr}/{cidr}",
+      "format-ethernet": " ",
+      "format-linked": " {ifname} (No IP)",
+      "format-disconnected": " Disconnected",
+      "format-alt": " {ifname}: {ipaddr}/{cidr}"
+  },
+	"memory": {
+		"interval": 5,
+		//"format": "Mem {}%"
+    "format": "",
+    "format-alt": " {}%"
+	},
+	"cpu": {
+		"interval": 5,
+		//"format": "CPU {usage:2}%"
+    "format": "",
+    "format-alt": " {usage:2}%",
+	},
+  "temperature": {
+      "critical-threshold": 80,
+      "format": "{icon}",
+      "format-alt": "{icon} {temperatureC}°C",
+      "format-icons": ["", "", ""]
+  },
+	"disk": {
+		"interval": 5,
+		//"format": "Disk {percentage_used:2}%",
+    "format": "",
+    "format-alt": " {percentage_used:2}%",
+		"path": "/"
+	},
+	"sway/language": {
+    "tooltip": false,
+		"disable-scroll": true,
+		"format": " {}",
+		"format-alt": ""
+	},
+	"tray": {
+		"icon-size": 20
+	},
+
+	"custom/right-arrow-final": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-final": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-fg-workspaces": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-bg-playerctl": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-fg-playerctl": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-bg-spotifyd": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-fg-spotifyd": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-clock-left": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-clock-left": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-clock-center": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-fg-clock-center": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-bg-clock-right": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-fg-clock-right": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-pacman": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-pacman": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-colorpicker": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-colorpicker": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-gpu": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-gpu": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-pulseaudio": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-pulseaudio": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-network": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-network": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-memory": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-memory": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-cpu": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-cpu": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-temperature": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-temperature": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-disk": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-bg-disk": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-fg-language": {
+		"format": "",
+		"tooltip": false
+	}
+}

@@ -1,117 +1,117 @@
 # Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
 # Read `man 5 sway` for a complete reference.
-
-font pango:DejaVu Sans Mono 9
 
 ### Variables
 #
-exec xrdb ~/.Xdefaults
-# Logo key. Use Mod1 for Alt.
+# Config dir
+set $config ~/dotfiles/.config/sway
+# Logo key
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-#set $term urxvt
-set $term termite
-# Your preferred application launcher
-set $menu dmenu_run
-# Your preferred browser
+# Preferred terminal emulator
+set $term kitty
+# Preferred application launcher
+#set $menu dmenu_path | dmenu | xargs swaymsg exec --
+#set $menu-font "Fira Code SemiBold 9"
+#set $menu-highlight ""
+#set $menu-title ""
+set $menu bemenu-run -p "▶" | xargs swaymsg exec
+# Preferred browser
 set $browser firefox-developer-edition
-# Your preferred text editor
-set $texteditor subl3
-# Your preferred ide
-set $ide _JAVA_AWT_WM_NONREPARENTING=1 pycharm
+# Preferred text editor
+set $texteditor nvim
 
-# scratchpad terminal
-for_window [title="scratchie"] move scratchpad, scratchpad show
- bindsym $mod+o exec --no-startup-id urxvt -T "scratchie"
-
-# scratchpad terminal termite
-#for_window [instance="scratchie"] floating enable, resize set 890px 210px, move position 515px 22px, move scratchpad, sticky enable
-#bindsym $mod+o exec $term -t scratchie
+### Styling
 #
-### Stylings
+# Font
+font Fira Code SemiBold 9
 # Borders
-new_window pixel 3
-new_float pixel 1
+default_border pixel 5
+default_floating_border pixel 1
+# Gaps
+gaps inner 20
+gaps outer 10
+gaps top 0
+# Floating window sizes
 #floating_minimum_size 800 x 520
-floating_maximum_size 1600 x 800
+#floating_maximum_size 1600 x 800
+# Color configuration (Base16 variables)
+include colorscheme
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0C $base0D
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
 
-### Output configuration
+### Output configuration (swaymsg -t get_outputs)
 #
-# Default wallpaper (more resolutions are available in /usr/share/sway/)
-#output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Wallpaper
 output * bg ~/.config/wallpaper.png fill
+#exec swaybg -i ~/Pictures/Wallpapers/wallpaper.png -m fill -o HDMI-A-1
+# Outputs
+output HDMI-A-1 pos 0 0 res 1920x1080
+#output HDMI-A-2 pos 1920 0 res 1360x768
+# Focus primary output
+#exec swaymsg focus output HDMI-A-1
+# Bind workspaces to monitors
+#set $output-primary HDMI-A-1
+#set $output-secondary HDMI-A-2
+#workspace 1 output $output-primary
+#workspace 2 output $output-primary
+#workspace 9 output $output-secondary
+#workspace 10 output $output-secondary
 
+### Idle configuration
 #
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-#output HDMI-A-2 resolution 1920x1080 position 0,0
+    # Lock screen after X seconds of inactivity
+    # Turn off displays after X seconds of inactivity
+    # Turn the displays back on when resumed
+    # Lock screen before computer goes to sleep
+exec swayidle \
+    timeout 3000 'swaylock -i ~/.config/lockscreen.png --scaling fill' \
+    timeout 6000 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -i ~/.config/lockscreen.png --scaling fill'
 
-### Input configuration
+### Input configuration (swaymsg -t get_inputs, man 5 sway-input)
 #
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+# Keyboard
+input 9456:320:Metadot_-_Das_Keyboard_Das_Keyboard {
+    xkb_model pc105
+    xkb_layout us,es
+    xkb_variant ,
+    xkb_numlock enabled
+    xkb_options grp:alt_shift_toggle,ctrl:nocaps
+}
 
 ### Key bindings
 #
 # Basics:
 #
-    # start a terminal
+    # Start a terminal
     bindsym $mod+Return exec $term
-    # start a termite urxvt (with ranger image display)
-    bindsym $mod+Backspace exec urxvt
-    # kill focused window
-    bindsym $mod+Shift+q kill
 
-    # start your launcher
+    # Kill focused window
+    bindsym $mod+q kill
+
+    # Start your launcher
     bindsym $mod+d exec $menu
 
-    # Drag floating windows by holding down $mod and left mouse button.
+    # Drag windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
     floating_modifier $mod normal
 
-    # reload the configuration file
+    # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+e exit
-
-    # take screenshot
-    bindsym --release Print exec sshot
-    # take screenshot of area
-    bindsym --release Shift+Print exec sshot_area
-
-    # start a browser
-    bindsym $mod+i exec $browser
-
-    # start a text editor
-    bindsym $mod+t exec $texteditor
-
-    # start pycharm
-    bindsym $mod+p exec $ide
-
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -120,18 +120,18 @@ output * bg ~/.config/wallpaper.png fill
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
-    # or use $mod+[up|down|left|right]
+    # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
 
-    # _move_ the focused window with the same, but add Shift
+    # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # ditto, with arrow keys
+    # Ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
@@ -139,30 +139,31 @@ output * bg ~/.config/wallpaper.png fill
 #
 # Workspaces:
 #
-    # switch to workspace
-    bindsym $mod+1 workspace 1
-    bindsym $mod+2 workspace 2
-    bindsym $mod+3 workspace 3
-    bindsym $mod+4 workspace 4
-    bindsym $mod+5 workspace 5
-    bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace 7
-    bindsym $mod+8 workspace 8
-    bindsym $mod+9 workspace 9
-    bindsym $mod+0 workspace 10
-    # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
-    bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
-    bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace 7
-    bindsym $mod+Shift+8 move container to workspace 8
-    bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    bindsym $mod+grave workspace home
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+Shift+grave move container to workspace home
     # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
 #
 # Layout stuff:
 #
@@ -186,23 +187,11 @@ output * bg ~/.config/wallpaper.png fill
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
-    # move focus to the parent container
+    # Move focus to the parent container
     bindsym $mod+a focus parent
-
-    # execute specific programs in floating mode
-    for_window [title="Visualization Toolkit - OpenGL"] floating enable
-    for_window [title="Figure 1"] floating enable
-    for_window [title="Figure 2"] floating enable
-    for_window [title="Figure 3"] floating enable
-    for_window [title="vCoolor"] floating enable
-    for_window [class="XaoS"] floating enable
-
 #
 # Scratchpad:
 #
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
 
@@ -222,37 +211,110 @@ mode "resize" {
     bindsym $up resize shrink height 10 px or 10 ppt
     bindsym $right resize grow width 10 px or 10 ppt
 
-    # ditto, with arrow keys
+    # Ditto, with arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
 
-    # get optimal size
+    # Get optimal size for floating windows
     bindsym o resize set 800 520
 
-    # return to default mode
+    # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+#
+# Multimedia and Special Keys:
+#
+    #Volume up
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+    #Volume down
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+    #Volume mute
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    #Play/Pause
+    bindsym XF86AudioPlay exec playerctl play-pause
+    #Next track
+    bindsym XF86AudioNext exec playerctl next
+    #Previous track
+    bindsym XF86AudioPrev exec playerctl previous
+    # Sleep
+    bindsym XF86Sleep exec systemctl sleep
+#
+# Custom bindings:
+#
+    # Scratchpad terminal
+    bindsym $mod+o exec kitty -T "scratchterm"
+    # Take screenshot
+    bindsym Print exec ~/bin/screenshot
+    # Take screenshot of area
+    bindsym Shift+Print exec ~/bin/screenshot_area
+    # Start a browser
+    bindsym $mod+i exec $browser
+    # Start a text editor
+    bindsym $mod+t exec $term sh -c "$texteditor"
+    # Password manager
+    bindsym $mod+p exec passmenu -p "Select account"
+    # Lock screen
+    bindsym $mod+Shift+q exec swaylock -i ~/.config/lockscreen.png --scaling fill
+    # Color picker
+    #bindsym $mod+c exec ~/bin/colorpicker
+    # Start spotifyd
+    bindsym $mod+m exec $term sh -c "~/bin/launchspt"
+    # Display window title
+    #bindsym $mod+t border toggle
+#
+# Swayr bindings
+#
+    bindsym $mod+z exec env RUST_BACKTRACE=1 \
+        swayr switch-window >> /tmp/swayr.log 2>&1
 
+    bindsym $mod+x exec env RUST_BACKTRACE=1 \
+        swayr quit-window > /tmp/swayr.log 2>&1
+
+    bindsym $mod+Tab exec env RUST_BACKTRACE=1 \
+        swayr switch-to-urgent-or-lru-window >> /tmp/swayr.log 2>&1
+
+    bindsym $mod+Next exec env RUST_BACKTRACE=1 \
+        swayr next-window >> /tmp/swayr.log 2>&2
+
+    bindsym $mod+Prior exec env RUST_BACKTRACE=1 \
+        swayr prev-window >> /tmp/swayr.log 2>&2
+
+    bindsym $mod+Shift+z exec env RUST_BACKTRACE=1 \
+        swayr switch-workspace-or-window >> /tmp/swayr.log 2>&1
+
+    bindsym $mod+period exec env RUST_BACKTRACE=1 \
+        swayr execute-swaymsg-command >> /tmp/swayr.log 2>&1
+
+    bindsym $mod+Shift+period exec env RUST_BACKTRACE=1 \
+      swayr execute-swayr-command >> /tmp/swayr.log 2>&1
+
+### Start up configuration
 #
-# Custom:
-#
-    # Reload .Xresources file
-    bindsym $mod+x exec xrdb ~/.Xresources
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+# Start scratchpad terminal
+for_window [title="scratchterm"] move container to scratchpad, scratchpad show
+# Execute specific programs in floating mode
+for_window [title="Visualization Toolkit - OpenGL"] floating enable
+for_window [title="Figure 1"] floating enable
+for_window [title="Figure 2"] floating enable
+for_window [title="Figure 3"] floating enable
+for_window [title="vCoolor"] floating enable
+for_window [class="XaoS"] floating enable
+for_window [class="jetbrains-pycharm-ce"] floating_minimum_size 800 x 650
+
+#### Status Bar (man 5 sway-bar)
+##
+#bar {
+#    swaybar_command waybar
+#}
 
 include /etc/sway/config.d/*
+
+exec waybar
+
+exec env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1
+
+#exec $config/startup.zsh $config

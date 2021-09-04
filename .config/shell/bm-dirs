@@ -1,0 +1,14 @@
+h ~/
+d ~/Documents
+p ~/Projects
+dl ~/Downloads
+px ~/Pictures
+vd ~/Videos
+mu ~/Music
+bf ~/bin
+cf ~/dotfiles/.config
+mn /mnt
+# cac $HOME/.cache
+# dt $HOME/.local/share
+# rr $HOME/.local/src
+# src $HOME/.local/src

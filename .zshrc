@@ -88,24 +88,21 @@ source $ZSH/oh-my-zsh.sh
 
 #################### Start of my custom configurations ####################
 
-export PATH=$HOME/bin:$PATH
+#export PATH=$HOME/bin:$PATH
 
 # Function to open processes as daemons:
 function open() { $* >/dev/null 2>/dev/null & disown }
 
 # Virtualenvwrapper configuration
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/projects
-source /usr/bin/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/projects
+#source /usr/bin/virtualenvwrapper.sh
 
 # VTK module for python
 # export PYTHONPATH=/usr/lib/python2.7/site-packages/vtk:$PYTHONPATH
 
 # Add custom location of the npm global packages
-export PATH=$HOME/.npm-global/bin:$PATH
-
-# Open pycharm in tiling window manager
-alias pycharmide="_JAVA_AWT_WM_NONREPARENTING=1 open pycharm"
+#export PATH=$HOME/.npm-global/bin:$PATH
 
 # Make alias to get numbered list of directories in stack
 alias dires="dirs -v"
@@ -115,14 +112,11 @@ unsetopt auto_pushd
 unsetopt pushd_ignore_dups
 
 # Use vim as my default text editor
-export VISUAL=vim
-export EDITOR="$VISUAL"
+#export VISUAL=nvim
+#export EDITOR="$VISUAL"
 
 # Alias to build hugo in dev directory
 alias hugos="hugo server -wD -d dev"
-
-# Alias to open processing
-alias processingide="_JAVA_AWT_WM_NONREPARENTING=1 open processing"
 
 # Load Xresources (for urxvt)
 #xrdb ~/.Xresources
@@ -136,3 +130,45 @@ source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 
 # firefox developer edition alias
 alias firefox-dev="firefox-developer-edition"
+
+# docker commands
+alias docker-clean-unused='docker system prune --all --force --volumes'
+alias docker-clean-all='docker stop $(docker container ls -a -q) && docker system prune -a -f --volumes'
+alias dc="docker-compose"
+alias dcrun="docker-compose run --rm"
+
+# JupyterLab Application Directory
+#export JUPYTERLAB_DIR=$HOME/.local/share/jupyter/lab
+
+# BROWSER environment variable for default browser in e.g. Jupyter Lab
+#export BROWSER=/usr/bin/firefox-developer-edition
+
+# launch spt alias
+alias spt="launchspt"
+alias bt="bintest"
+
+# get current term name
+alias which_term="ps -aux | grep `ps -p $$ -o ppid=` | awk 'NR==1{print \$11}'"
+
+# Fix java apps in sway
+#if [ "$XDG_SESSION_DESKTOP" = "sway" ] ; then
+#    # https://github.com/swaywm/sway/issues/595
+#    export _JAVA_AWT_WM_NONREPARENTING=1
+#fi
+
+# Vimpager
+#export PAGER=
+#alias less=$PAGER
+#alias zless=$PAGER
+
+#cs 50 environment variables
+#export CC=clang
+#export CFLAGS="-ggdb3 -O0 -std=c99 -Wall -Werror"
+#export LDLIBS="-lcs50 -lm"
+#export LDLIBS="-lcs50"
+
+alias conda_activate='eval "$(/home/idest/miniconda3/bin/conda shell.zsh hook)"'
+
+export MOZ_ENABLE_WAYLAND=1
+
+alias ls="exa"

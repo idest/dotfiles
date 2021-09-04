@@ -1,23 +1,81 @@
 " Global settings for all files (but may be overridden in ftplugin)
 
 """Vim-plug
-call plug#begin('~/.vim/plugged')
-Plug 'sjl/gundo.vim'
-Plug 'rking/ag.vim'
-Plug 'wikitopian/hardmode'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
-Plug 'morhetz/gruvbox'
-"Plug 'Valloric/YouCompleteMe'
-Plug 'itchyny/lightline.vim'
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'mattn/emmet-vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'tpope/vim-surround'
-Plug 'pangloss/vim-javascript'
-Plug 'sbdchd/neoformat'
-call plug#end()
+""call plug#begin('~/.vim/plugged')
+""Plug 'Valloric/YouCompleteMe'
+""Plug 'sjl/gundo.vim'
+""Plug 'rking/ag.vim'
+""Plug 'wikitopian/hardmode'
+""Plug 'francoiscabrol/ranger.vim'
+"""Next one needed by ranger.vim in neovim
+""Plug 'rbgrouleff/bclose.vim'
+""Plug 'ctrlpvim/ctrlp.vim'
+""Plug 'tacahiroy/ctrlp-funky'
+""Plug 'morhetz/gruvbox'
+""Plug 'itchyny/lightline.vim'
+""Plug 'KabbAmine/vCoolor.vim'
+""Plug 'mattn/emmet-vim'
+""Plug 'hail2u/vim-css3-syntax'
+""Plug 'tpope/vim-surround'
+""Plug 'pangloss/vim-javascript'
+""Plug 'sbdchd/neoformat'
+""Plug 'idest/vim-instant-markdown'
+""Plug 'mhinz/vim-startify'
+""Plug 'mxw/vim-jsx'
+""Plug 'styled-components/vim-styled-components'
+"""Plug 'tpope/vim-vinegar'
+""Plug 'majutsushi/tagbar'
+""call plug#end()
+
+"""Vundle
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin() "call vundle#begin('~/installation/path/here')
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'sjl/gundo.vim'
+Plugin 'rking/ag.vim'
+Plugin 'wikitopian/hardmode'
+Plugin 'francoiscabrol/ranger.vim'
+"Next one needed by ranger.vim in neovim
+Plugin 'rbgrouleff/bclose.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'morhetz/gruvbox'
+Plugin 'itchyny/lightline.vim'
+Plugin 'KabbAmine/vCoolor.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'tpope/vim-surround'
+Plugin 'pangloss/vim-javascript'
+Plugin 'sbdchd/neoformat'
+Plugin 'idest/vim-instant-markdown'
+Plugin 'mhinz/vim-startify'
+Plugin 'mxw/vim-jsx'
+Plugin 'styled-components/vim-styled-components'
+"Plugin 'tpope/vim-vinegar'
+Plugin 'majutsushi/tagbar'
+Plugin 'vimwiki/vimwiki'
+Plugin 'patriciogonzalezvivo/vim-glslViewer.git'
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'ap/vim-css-color'
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" see :h vundle for more details or wiki for FAQ
+
+"""Searching
+set ignorecase "" ignore case in searches and substitutions
+set smartcase "" override ignorecase when using a capital letter
 
 """Styling
 syntax enable " enable syntax processing
@@ -120,16 +178,16 @@ nnoremap <leader>qa :qa<CR>
 " write buffer and quit window
 nnoremap <leader>wq :wq<CR>
 " write buffer
-nnoremap <leader>ww :w<CR>
-" yank and paste text to X11 clipboard
-nnoremap <leader>y "*y
-nnoremap <leader>p "*p
+"nnoremap <leader>ww :w<CR>
+" yank and paste text to X11 / Wayland clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
 " list special characters (listchars)
 nnoremap <leader>l :set list!<CR>
 " shortcut for ctrlp-funky
 nnoremap <leader>fu :CtrlPFunky<CR>
 " shortcut for ranger.vim
-let g:ranger_map_keys = 0
 nnoremap <leader>ff :Ranger<CR>
 " shortcut for inserting single character
 nnoremap <space> i_<ESC>r
@@ -147,6 +205,13 @@ nnoremap <leader>cc :cd %:h<CR>
 nnoremap <leader>r :%s:::gc<left><left><left><left>
 " include grouping (i.e '\(\)') in search pattern"
 cmap ;\ \(\)<Left><Left>
+" Move lines around
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 """Insert mode remaps
 inoremap " ""<left>
 inoremap ' ''<left>
@@ -154,19 +219,31 @@ inoremap ` ``<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
+inoremap `<CR> `<CR>`<ESC>0
 inoremap (<CR> (<CR>)<ESC>O
 inoremap [<CR> [<CR>]<ESC>O
 inoremap {<CR> {<CR>}<ESC>O
-inoremap ,. <right>
-inoremap ., <left>
+inoremap /,. <right>
+inoremap /., <left>
 inoremap "" ""
 inoremap '' ''
 inoremap `` ``
 inoremap () ()
 inoremap [] []
 inoremap {} {}
+inoremap "<Esc> "<Esc>
+inoremap '<Esc> '<Esc>
+inoremap `<Esc> `<Esc>
+inoremap (<Esc> (<Esc>
+inoremap [<Esc> [<Esc>
+inoremap {<Esc> {<Esc>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
+inoremap <C-l> <Esc>la
+inoremap <C-h> <Esc>i
+"" Terminal mode remaps
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-c> <C-\><C-n>
 
 "" resize split windows
 "width
@@ -211,7 +288,9 @@ autocmd BufRead *
 nnoremap <leader>cp :call SetProjectRoot()<CR>
 
 """YCM Config
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
+let g:ycm_server_python_interpreter = '/usr/bin/python'
+let g:ycm_auto_trigger = 1
+""let g:ycm_python_binary_path = '/usr/bin/python'
 
 """CtrlP config
 nnoremap <C-a> :CtrlP
@@ -250,12 +329,65 @@ autocmd FileType html,css EmmetInstall
 """ Neoformat config
 
 let g:neoformat_only_msg_on_error = 1
+""let g:neoformat_verbose=1
+"" it is needed to be running the file form ./node-modules scope
 let g:neoformat_javascript_prettier = {
       \ 'exe': './node_modules/.bin/prettier',
       \ 'args': ['--single-quote', '--write'],
       \ 'replace': 1
       \ }
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
+""augroup fmt
+""  autocmd!
+""  autocmd BufWritePre * undojoin | Neoformat
+""augroup END
+
+""" vim-instant-markdown config
+let g:instant_markdown_autostart = 0
+nnoremap <leader>ms :InstantMarkdownPreview<CR>
+nnoremap <leader>mk :StopMarkdownPreview<CR>
+
+"" vim-startify config
+nnoremap <leader>st :Startify<CR>
+
+""" vim-jsx config
+let g:jsx_ext_required = 0
+
+""" vim-vinegar config
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+""" ranger.vim config
+let g:ranger_map_keys = 0
+let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
+
+""" vim tagbar config
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+nmap <leader>tt  :TagbarToggle<CR>
+
+""" vimwiki config
+set nocompatible
+filetype plugin on
+syntax on
+nnoremap <leader><CR> :VimwikiVSplitLink<CR>
+
+let g:vimwiki_hl_headers = 1
+
+function! VimwikiLinkHandler(link)
+  " Use Vim to open external files with the 'vfile:' scheme.  E.g.:
+  "   1) [[vfile:~/Code/PythonProject/abc123.py]]
+  "   2) [[vfile:./|Wiki Home]]
+  let link = a:link
+  if link =~# '^vfile:'
+    let link = link[1:]
+  else
+    return 0
+  endif
+  let link_infos = vimwiki#base#resolve_link(link)
+  if link_infos.filename == ''
+    echomsg 'Vimwiki Error: Unable to resolve link!'
+    return 0
+  else
+    exe 'tabnew ' . fnameescape(link_infos.filename)
+    return 1
+  endif
+endfunction
