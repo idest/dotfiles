@@ -1,0 +1,5 @@
+#!/bin/bash
+export XKB_DEFAULT_LAYOUT=us,es
+export XKB_DEFAULT_VARIANT=,
+export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle,ctrl:nocaps
+sway

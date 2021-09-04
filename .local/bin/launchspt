@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#killall spotifyd
+if [ ! $(pgrep "spotifyd") ]; then
+  spotifyd -u "javierinigo" -P "pass spotify" --on-song-change-hook "~/dotfiles/.config/spotifyd/trackinfo.sh"
+  echo "spotifyd started"
+fi
+
+spt

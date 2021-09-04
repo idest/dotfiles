@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Parsing bash script options with getopt
+# https://wiki.bash-hackers.org/howto/getopts_tutorial
+# https://sookocheff.com/post/bash/parsing-bash-script-arguments-with-shopts/
+while getopts ":cf:" opt; do
+  case $opt in
+    c) copy=true ;;
+    f) format=$OPTARG ;;
+    \?)
+      echo "Invalid Option: -${OPTARG}" 1>&2
+      exit 1
+      ;;
+    :)
+      echo "Invalid Option: -$OPTARG requires an argument" 1>&2
+      exit 1
+      ;;
+  esac
+done
+
+rgbcolor=$( grim -g "$(slurp -p)" - -t png -o | convert png:- -format '%[pixel:s]\n' info:- | cut -c 2- )
+
+#Check if $format is variable non-empty
+# use if [ -z ${format+x} ] to check if $format is not set
+# see Lionel answer in https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
+if [ $format ]
+then
+  case $format in
+    rgb) ocolor=$rgbcolor
+      ;;
+    rgba) ocolor=$(echo $rgbcolor | awk -F '[(,)]' '{printf("rgba(%d,%d,%d,255)\n",$2,$3,$4)}')
+      ;;
+    hex)
+      ocolor=$(echo $rgbcolor | awk -F '[(,)]' '{printf("#%02x%02x%02x\n",$2,$3,$4)}')
+      ;;
+    *)
+      echo "Invalid Format: $format" 1>&2
+      exit 1
+      ;;
+  esac
+else
+  ocolor=$rgbcolor
+fi
+
+if [ $copy ]
+then
+  wl-copy $ocolor # Copy to wayland clipboard
+else
+  echo $ocolor
+fi

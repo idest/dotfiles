@@ -1,0 +1,6 @@
+#!/bin/sh
+IFS="
+"
+while read LINE; do
+  echo got line $LINE
+done

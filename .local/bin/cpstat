@@ -1,0 +1,2 @@
+size="$(du -sh "$1" | awk '{print $1;}')"
+tar c "$1" | pv -s $size | tar x -C "$2"
