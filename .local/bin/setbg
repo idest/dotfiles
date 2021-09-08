@@ -1,1 +1,3 @@
+#!/bin/sh
+
 cp "$1" ~/Pictures/Wallpapers/wallpaper.png && swaymsg output "*" bg ~/Pictures/Wallpapers/wallpaper.png fill

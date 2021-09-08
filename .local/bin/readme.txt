@@ -1,0 +1,30 @@
+bin scripts from voidrice (.voidrice files are ignored):
+- compiler.voidrice - compiler or run another finishing operation on a document.
+    - Used in vim.
+- dmenupass.voidrice - provide SUDO_ASKPASS variable (it will be used as a password prompt if needed
+    - Used in shell profile
+- dmenuhandler - choose app to open file with dmenu
+    - Used in newsboat
+- ext - extraction utility
+    - Used in lf
+- ifinstalled - notify user if program needs to be installed
+    - Used in sxiv
+- lf-select - read file names from stdin and selects them in lf
+    - Used in lf
+- linkhandler.voidrice - handles different types of links
+    - Used in newsboat
+- opout - opening a file's intended output
+    - Used in vim
+- peertubetorrent.voidrice - Torrent peertube videos (requires transadd)
+    - Used in newsboat
+- qndl - queue and download
+    - Used in newsboat
+- rotdir - allow to automatically rotate through images in sxiv
+    - Used in lf
+- setbg.voidrice - set backbround, nice utility should adjust for sway
+    - Used in sxiv, lf, x11
+- shortcuts - creates configurations to use the same shortcuts in different programs
+    - Used in shell profile, shell aliases file, and vim
+- transadd.voidrice - script for adding torrents to transmission
+- texclear.voidrice - clear the build files of a latex/xelatex build
+    - Used in vim

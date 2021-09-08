@@ -125,8 +125,8 @@ alias hugos="hugo server -wD -d dev"
 alias gohugo="hugo server -D -d dev"
 
 # dynamic-colors Xdefaults
-export PATH="$HOME/.dynamic-colors/bin:$PATH"
-source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
+#export PATH="$HOME/.dynamic-colors/bin:$PATH"
+#source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 
 # firefox developer edition alias
 alias firefox-dev="firefox-developer-edition"
