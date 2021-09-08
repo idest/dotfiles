@@ -1,5 +1,0 @@
-#!/bin/bash
-
-shotfile=~/Pictures/screenshots/$(date +%Y-%m-%d-T%H%M%S).png
-swaygrab $shotfile
-convert $shotfile -crop "$(slop)" $shotfile

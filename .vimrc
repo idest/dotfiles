@@ -1,32 +1,5 @@
 " Global settings for all files (but may be overridden in ftplugin)
 
-"""Vim-plug
-""call plug#begin('~/.vim/plugged')
-""Plug 'Valloric/YouCompleteMe'
-""Plug 'sjl/gundo.vim'
-""Plug 'rking/ag.vim'
-""Plug 'wikitopian/hardmode'
-""Plug 'francoiscabrol/ranger.vim'
-"""Next one needed by ranger.vim in neovim
-""Plug 'rbgrouleff/bclose.vim'
-""Plug 'ctrlpvim/ctrlp.vim'
-""Plug 'tacahiroy/ctrlp-funky'
-""Plug 'morhetz/gruvbox'
-""Plug 'itchyny/lightline.vim'
-""Plug 'KabbAmine/vCoolor.vim'
-""Plug 'mattn/emmet-vim'
-""Plug 'hail2u/vim-css3-syntax'
-""Plug 'tpope/vim-surround'
-""Plug 'pangloss/vim-javascript'
-""Plug 'sbdchd/neoformat'
-""Plug 'idest/vim-instant-markdown'
-""Plug 'mhinz/vim-startify'
-""Plug 'mxw/vim-jsx'
-""Plug 'styled-components/vim-styled-components'
-"""Plug 'tpope/vim-vinegar'
-""Plug 'majutsushi/tagbar'
-""call plug#end()
-
 """Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required

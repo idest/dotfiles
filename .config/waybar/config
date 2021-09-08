@@ -32,7 +32,6 @@
 		"custom/right-arrow-final"
 	],
 	"modules-right": [
-    //"custom/test",
 		"custom/left-arrow-final",
 		"custom/left-arrow-fg-pacman",
 		"custom/pacman",
@@ -91,7 +90,7 @@
     "escape": true,
     "return-type": "json",
     "max-length": 40,
-    "exec": "~/dotfiles/.config/waybar/modules/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+    "exec": "~/.config/waybar/modules/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
     "signal": 8
   },
 
@@ -101,15 +100,13 @@
     "max-length": 80,
     "exec": "echo $(playerctl metadata --format '{{ title }} - {{ artist }}')",
     "exec-if": "pgrep spotifyd",
-    "on-click-right": "kitty sh -c '~/bin/launchspt'",
+    "on-click-right": "kitty sh -c 'launchspt'",
     "on-click-middle": "killall spt; killall spotifyd",
     "signal": 8
   },
 
 	"clock#left": {
 		"format": "{:%a}",
-    //"timezone": "America/Asuncion",
-    //"locale": "es_ES.UTF-8",
 		"tooltip": false
 	},
 	"clock#center": {
@@ -131,28 +128,16 @@
   "custom/colorpicker": {
     "format": "",
     "tooltip": false,
-    "on-click": "~/bin/colorpicker -f rgb -c",
-    "on-click-right": "~/bin/colorpicker -f hex -c"
+    "on-click": "colorpicker -f rgb -c",
+    "on-click-right": "colorpicker -f hex -c"
   },
   "custom/gpu": {
     "restart-interval": 2,
     "format": "",
     "format-alt": " {}",
     "tooltip": false,
-    "exec": "~/bin/waybar-gpustats",
+    "exec": "waybar-gpustats",
     //"on-click-right": "killall htop & alacritty -t htop -e htop"
-  },
-  "custom/test": {
-    "exec": "~/bin/waybar-test",
-    //"restart-interval": 2,
-    //"format-alt": "test {}",
-    "format": "test {}",
-    "format-alt": "test2 {}",
-    "on-click": "if [ pgrep spotify ]killall waybar-test",
-    //"exec-on-event": true
-    //"exec-if": "pgrep waybar-test",
-    //"interval": 1
-    //"restart-interval": 2,
   },
 	"pulseaudio": {
 		"format": "{icon} {volume:2}%",
@@ -174,7 +159,6 @@
       "tooltip": false,
       // "interface": "wlp2*", // (Optional) To force the use of this interface
       "format-wifi": " {essid} ({signalStrength}%)",
-      //"format-ethernet": " {ifname}: {ipaddr}/{cidr}",
       "format-ethernet": " ",
       "format-linked": " {ifname} (No IP)",
       "format-disconnected": " Disconnected",
@@ -182,13 +166,11 @@
   },
 	"memory": {
 		"interval": 5,
-		//"format": "Mem {}%"
     "format": "",
     "format-alt": " {}%"
 	},
 	"cpu": {
 		"interval": 5,
-		//"format": "CPU {usage:2}%"
     "format": "",
     "format-alt": " {usage:2}%",
 	},
@@ -200,7 +182,6 @@
   },
 	"disk": {
 		"interval": 5,
-		//"format": "Disk {percentage_used:2}%",
     "format": "",
     "format-alt": " {percentage_used:2}%",
 		"path": "/"

@@ -1,9 +1,3 @@
 #!/bin/sh
 
-#echo "$*" >> "/home/idest/bin/tmp.log"
-#echo "$@" >> "/home/idest/bin/tmp.log"
-#echo "$#" >> "/home/idest/bin/tmp.log"
-#echo "$-" >> "/home/idest/bin/tmp.log"
-#echo "$_" >> "/home/idest/bin/tmp.log"
-
 tee | bemenu "$@"

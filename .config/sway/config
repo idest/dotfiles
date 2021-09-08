@@ -4,7 +4,7 @@
 ### Variables
 #
 # Config dir
-set $config ~/dotfiles/.config/sway
+set $config ~/.config/sway
 # Logo key
 set $mod Mod4
 # Home row direction keys, like vim
@@ -248,9 +248,9 @@ bindsym $mod+r mode "resize"
     # Scratchpad terminal
     bindsym $mod+o exec kitty -T "scratchterm"
     # Take screenshot
-    bindsym Print exec ~/bin/screenshot
+    bindsym Print exec screenshot # ~/bin/screenshot
     # Take screenshot of area
-    bindsym Shift+Print exec ~/bin/screenshot_area
+    bindsym Shift+Print exec screenshot_area # ~/bin/screenshot_area
     # Start a browser
     bindsym $mod+i exec $browser
     # Start a text editor
@@ -260,9 +260,9 @@ bindsym $mod+r mode "resize"
     # Lock screen
     bindsym $mod+Shift+q exec swaylock -i ~/.config/lockscreen.png --scaling fill
     # Color picker
-    #bindsym $mod+c exec ~/bin/colorpicker
+    #bindsym $mod+c exec colorpicker # ~/bin/colorpicker
     # Start spotifyd
-    bindsym $mod+m exec $term sh -c "~/bin/launchspt"
+    bindsym $mod+m exec $term sh -c launchspt # "~/bin/launchspt"
     # Display window title
     #bindsym $mod+t border toggle
 #

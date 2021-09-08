@@ -25,7 +25,7 @@ alias bt="bintest"
 # get current term name
 alias which_term="ps -aux | grep `ps -p $$ -o ppid=` | awk 'NR==1{print \$11}'"
 
-alias conda_activate='eval "$(/home/idest/miniconda3/bin/conda shell.zsh hook)"'
+#alias conda_activate='eval "$(~/miniconda3/bin/conda shell.zsh hook)"'
 
 alias ls="exa"
 

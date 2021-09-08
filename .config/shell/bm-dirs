@@ -5,8 +5,8 @@ dl ~/Downloads
 px ~/Pictures
 vd ~/Videos
 mu ~/Music
-bf ~/bin
-cf ~/dotfiles/.config
+bf ~/.local/bin
+cf ~/.config
 mn /mnt
 # cac $HOME/.cache
 # dt $HOME/.local/share
