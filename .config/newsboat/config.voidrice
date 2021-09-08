@@ -1,6 +1,8 @@
 #show-read-feeds no
 auto-reload yes
 
+external-url-viewer "urlscan -dc -r 'linkhandler {}'"
+
 bind-key j down
 bind-key k up
 bind-key j next articlelist
@@ -34,10 +36,10 @@ macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best" ; ope
 macro v set browser "setsid -f mpv" ; open-in-browser ; set browser linkhandler
 macro w set browser "lynx" ; open-in-browser ; set browser linkhandler
 macro d set browser "dmenuhandler" ; open-in-browser ; set browser linkhandler
-macro c set browser "echo %u | wl-copy -n" ; open-in-browser ; set browser linkhandler
+macro c set browser "echo %u | xclip -r -sel c" ; open-in-browser ; set browser linkhandler
 macro C set browser "youtube-viewer --comments=%u" ; open-in-browser ; set browser linkhandler
-#macro p set browser "peertubetorrent %u 480" ; open-in-browser ; set browser linkhandler
-#macro P set browser "peertubetorrent %u 1080" ; open-in-browser ; set browser linkhandler
+macro p set browser "peertubetorrent %u 480" ; open-in-browser ; set browser linkhandler
+macro P set browser "peertubetorrent %u 1080" ; open-in-browser ; set browser linkhandler
 
 highlight all "---.*---" yellow
 highlight feedlist ".*(0/0))" black
